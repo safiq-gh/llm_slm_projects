@@ -1,0 +1,192 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.message.text }}",
+        "options": {
+          "systemMessage": "=You are a meeting scheduling assistant.\n\nYour job is to coordinate meetings accurately and efficiently.\n\nRules:\n- Always confirm date, time, timezone, duration, participants, and format (virtual/in-person).\n- Never assume missing details — ask concise clarification questions.\n- Detect and avoid scheduling conflicts.\n- If a time is unavailable, propose 2–3 clear alternatives.\n- Always state times with timezone.\n- When a time is agreed, restate all final details clearly for confirmation.\n- Be concise, professional, and direct.\n- No small talk or filler language.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1152,
+        16
+      ],
+      "id": "1fa634f5-78eb-438a-8a85-c67e29aa8e8a",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "fpes693@gmail.com",
+          "mode": "list",
+          "cachedResultName": "fpes693@gmail.com"
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        1344,
+        240
+      ],
+      "id": "1462ec2b-f15f-44e1-8eca-2f7bdd2545a2",
+      "name": "Create an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "T5iAf7sGPxsKR1QT",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        896,
+        16
+      ],
+      "id": "5085254e-5e27-4aa2-a4fe-0ab10d2962a0",
+      "name": "Telegram Trigger",
+      "webhookId": "5e92ab46-f0af-4cf8-b9b1-4f4f14878b22",
+      "credentials": {
+        "telegramApi": {
+          "id": "alkFw6tSD6Hf4rDV",
+          "name": "Batman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1504,
+        16
+      ],
+      "id": "f507689f-20a0-49c8-8b1f-290faa99e026",
+      "name": "Send a text message",
+      "webhookId": "537d9079-e3d1-4a9b-a27e-e2d688278940",
+      "credentials": {
+        "telegramApi": {
+          "id": "alkFw6tSD6Hf4rDV",
+          "name": "Batman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.from.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1184,
+        240
+      ],
+      "id": "a0f8ff1a-405c-4f0c-84c0-cc839912fa76",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1040,
+        240
+      ],
+      "id": "5226fa3d-af4c-45f3-afe6-dc817795ee1a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "FqPjZECzsNL3CBpK",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an event in Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "42e0928544338d491705988300347b44d5c757e282704906ff569cfc1f7fb08e"
+  }
+}
