@@ -21,9 +21,9 @@
       "parameters": {
         "calendar": {
           "__rl": true,
-          "value": "fpes693@gmail.com",
+          "value": "primary",
           "mode": "list",
-          "cachedResultName": "fpes693@gmail.com"
+          "cachedResultName": "Primary Calendar"
         },
         "additionalFields": {}
       },
@@ -37,7 +37,7 @@
       "name": "Create an event in Google Calendar",
       "credentials": {
         "googleCalendarOAuth2Api": {
-          "id": "T5iAf7sGPxsKR1QT",
+          "id": "YOUR_GOOGLE_CALENDAR_CREDENTIAL_ID",
           "name": "Google Calendar account"
         }
       }
@@ -60,8 +60,8 @@
       "webhookId": "5e92ab46-f0af-4cf8-b9b1-4f4f14878b22",
       "credentials": {
         "telegramApi": {
-          "id": "alkFw6tSD6Hf4rDV",
-          "name": "Batman"
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram Bot"
         }
       }
     },
@@ -82,8 +82,8 @@
       "webhookId": "537d9079-e3d1-4a9b-a27e-e2d688278940",
       "credentials": {
         "telegramApi": {
-          "id": "alkFw6tSD6Hf4rDV",
-          "name": "Batman"
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram Bot"
         }
       }
     },
@@ -121,8 +121,8 @@
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
-          "id": "FqPjZECzsNL3CBpK",
-          "name": "n8n free OpenAI API credits"
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI API"
         }
       }
     }
@@ -186,7 +186,7 @@
   },
   "pinData": {},
   "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "42e0928544338d491705988300347b44d5c757e282704906ff569cfc1f7fb08e"
+    "templateCredsSetupCompleted": false,
+    "instanceId": "YOUR_N8N_INSTANCE_ID"
   }
 }
