@@ -5,7 +5,7 @@
         "promptType": "define",
         "text": "={{ $json.message.text }}",
         "options": {
-          "systemMessage": "You are an email assistant.\n\nBased on the user’s request, you must perform one of the following:\n\nSummarize an email\nSend an email\nSummarize an email and send the summary\nAfter completing the task, return only an execution report in the exact format below.\n\nOutput Format (Mandatory)\n`Task Performed:\nEmail Summary / Email Sent / Email Summary & Sent\n\nDetails:\n- If summarized: State that the email was summarized.\n- If sent: State the recipient email address.\n- If both: State that the email was summarized and sent, including the recipient email address.\n\nStatus:\nSuccess / Failed\n`\n\nRules\n\nDo not include email content unless explicitly requested.\nDo not explain reasoning.\nDo not add greetings or extra commentary.\nKeep the report concise and factual.\nIf an error occurs, set Status to “Failed” and state the error briefly under Details.\n"
+          "systemMessage": "You are an email assistant.\n\nBased on the user's request, you must perform one of the following:\n\nSummarize an email\nSend an email\nSummarize an email and send the summary\nAfter completing the task, return only an execution report in the exact format below.\n\nOutput Format (Mandatory)\n`Task Performed:\nEmail Summary / Email Sent / Email Summary & Sent\n\nDetails:\n- If summarized: State that the email was summarized.\n- If sent: State the recipient email address.\n- If both: State that the email was summarized and sent, including the recipient email address.\n\nStatus:\nSuccess / Failed\n`\n\nRules\n\nDo not include email content unless explicitly requested.\nDo not explain reasoning.\nDo not add greetings or extra commentary.\nKeep the report concise and factual.\nIf an error occurs, set Status to "Failed" and state the error briefly under Details.\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -37,8 +37,8 @@
       "name": "GPT",
       "credentials": {
         "openAiApi": {
-          "id": "FqPjZECzsNL3CBpK",
-          "name": "n8n free OpenAI API credits"
+          "id": "YOUR_OPENAI_CREDENTIAL_ID",
+          "name": "OpenAI API"
         }
       }
     },
@@ -60,8 +60,8 @@
       "webhookId": "3a76f810-ef6a-4818-9aa8-7055d4901b3f",
       "credentials": {
         "telegramApi": {
-          "id": "alkFw6tSD6Hf4rDV",
-          "name": "Batman"
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram Bot"
         }
       }
     },
@@ -82,7 +82,7 @@
       "webhookId": "c72df394-8fc9-4746-a166-6f0797d7a405",
       "credentials": {
         "gmailOAuth2": {
-          "id": "LKodilKnen6rXwD0",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -106,14 +106,14 @@
       "webhookId": "f665b021-8713-46b8-b3b7-15561b41b5be",
       "credentials": {
         "telegramApi": {
-          "id": "alkFw6tSD6Hf4rDV",
-          "name": "Batman"
+          "id": "YOUR_TELEGRAM_CREDENTIAL_ID",
+          "name": "Telegram Bot"
         }
       }
     },
     {
       "parameters": {
-        "sendTo": "fpes693@gmail.com",
+        "sendTo": "recipient@example.com",
         "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
         "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
         "options": {
@@ -131,7 +131,7 @@
       "webhookId": "f5f3ec48-8549-4c99-aaa1-9e5e48a700c6",
       "credentials": {
         "gmailOAuth2": {
-          "id": "LKodilKnen6rXwD0",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -196,7 +196,7 @@
   },
   "pinData": {},
   "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "42e0928544338d491705988300347b44d5c757e282704906ff569cfc1f7fb08e"
+    "templateCredsSetupCompleted": false,
+    "instanceId": "YOUR_N8N_INSTANCE_ID"
   }
 }
